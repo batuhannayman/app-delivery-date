@@ -36,23 +36,23 @@
     <span class="edd__icon" aria-hidden="true">🚚</span>
   {%- endif -%}
   <span class="edd__text" data-edd-text></span>
-</div>
 
-<script type="application/json" data-edd-config>
-  {
-    "prepDays": {{ block.settings.prep_days | default: 1 }},
-    "cutoff": {{ block.settings.cutoff_time | json }},
-    "timezone": {{ shop.iana_timezone | json }},
-    "shipMin": {{ block.settings.ship_min | default: 2 }},
-    "shipMax": {{ block.settings.ship_max | default: 5 }},
-    "businessDays": [{{ biz_days | join: ',' }}],
-    "holidays": {{ block.settings.holidays | json }},
-    "messageSingle": {{ block.settings.message_single | json }},
-    "messageRange": {{ block.settings.message_range | json }},
-    "showWeekday": {{ block.settings.show_weekday }},
-    "locale": {{ request.locale.iso_code | json }}
-  }
-</script>
+  <script type="application/json" data-edd-config>
+    {
+      "prepDays": {{ block.settings.prep_days | default: 1 }},
+      "cutoff": {{ block.settings.cutoff_time | json }},
+      "timezone": {{ shop.iana_timezone | json }},
+      "shipMin": {{ block.settings.ship_min | default: 2 }},
+      "shipMax": {{ block.settings.ship_max | default: 5 }},
+      "businessDays": [{{ biz_days | join: ',' }}],
+      "holidays": {{ block.settings.holidays | json }},
+      "messageSingle": {{ block.settings.message_single | json }},
+      "messageRange": {{ block.settings.message_range | json }},
+      "showWeekday": {{ block.settings.show_weekday }},
+      "locale": {{ request.locale.iso_code | json }}
+    }
+  </script>
+</div>
 
 {{ 'delivery-date.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'delivery-date.js' | asset_url }}" defer></script>
