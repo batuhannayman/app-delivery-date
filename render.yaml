@@ -1,0 +1,23 @@
+# Render Blueprint — deploys the embedded app backend on the free plan.
+# Create the service from this file (Render → New → Blueprint) OR set the same
+# values manually in a Web Service. See store-listing/HOSTING.md for the full runbook.
+services:
+  - type: web
+    name: delivery-date
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: npx prisma migrate deploy && npm run start
+    envVars:
+      - key: NODE_VERSION
+        value: "22.12.0"
+      # Set these in the Render dashboard (marked secret / not committed):
+      - key: SHOPIFY_API_KEY # = client_id from shopify.app.toml
+        sync: false
+      - key: SHOPIFY_API_SECRET # from Partner Dashboard → app → API credentials
+        sync: false
+      - key: SHOPIFY_APP_URL # the https://<service>.onrender.com URL (set after first deploy)
+        sync: false
+      - key: DATABASE_URL # Neon DIRECT connection string
+        sync: false
