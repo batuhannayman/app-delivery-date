@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "e050dfad27997cceac099a0251c52add"
-application_url = "https://shopify.dev/apps/default-app-home"
+application_url = "https://delivery-date-011j.onrender.com"
 embedded = true
 name = "Delivery Date"
 
@@ -34,7 +34,7 @@ api_version = "2026-10"
   compliance_topics = [ "shop/redact" ]
 
 [auth]
-redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
+redirect_urls = [ "https://delivery-date-011j.onrender.com/auth/callback" ]
 
 [build]
 include_config_on_deploy = true
