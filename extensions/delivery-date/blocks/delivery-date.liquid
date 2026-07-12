@@ -54,22 +54,8 @@
   }
 </script>
 
+{{ 'delivery-date.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'delivery-date.js' | asset_url }}" defer></script>
-
-{% stylesheet %}
-  .edd {
-    display: flex;
-    align-items: center;
-    gap: 0.4em;
-    margin: 0.5rem 0;
-    font-size: 0.95rem;
-    line-height: 1.4;
-    color: var(--edd-color, inherit);
-  }
-  .edd[hidden] { display: none; }
-  .edd__icon { font-size: 1.1em; }
-  .edd__text { font-weight: 600; }
-{% endstylesheet %}
 
 {% schema %}
 {
