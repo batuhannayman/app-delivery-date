@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Estimated Delivery Date</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 720px; margin: 0 auto; padding: 2.5rem 1.25rem; color: #1a1a1a;
+  }
+  @media (prefers-color-scheme: dark) { body { background: #111; color: #e6e6e6; } a { color: #7aa2ff; } }
+  h1 { font-size: 1.7rem; margin-bottom: 0.25rem; }
+  h2 { font-size: 1.15rem; margin-top: 2rem; }
+  .updated { color: #888; font-size: 0.9rem; margin-top: 0; }
+  ul { padding-left: 1.25rem; }
+  code { background: rgba(127,127,127,0.15); padding: 0.1em 0.35em; border-radius: 4px; }
+</style>
+</head>
+<body>
+  <h1>Privacy Policy — Estimated Delivery Date</h1>
+  <p class="updated">Last updated: 12 July 2026</p>
+
+  <p>This Privacy Policy explains how the <strong>Estimated Delivery Date</strong>
+  app ("the App") handles information when a Shopify merchant installs and uses it.</p>
+
+  <h2>Summary</h2>
+  <p>The App shows an estimated delivery date on a store's product pages.
+  <strong>It does not collect, store, or process any personal data about shoppers
+  or customers.</strong> Delivery dates are calculated in the shopper's own browser
+  from the rules the merchant configures. Nothing about the shopper is sent to us.</p>
+
+  <h2>What the App stores</h2>
+  <p>To operate as an embedded Shopify app, the App stores a <strong>session record
+  for the installing store</strong> (the store's <code>myshopify.com</code> domain
+  and the access token Shopify issues at install). This is used only to authenticate
+  the store's admin session. It contains no customer personal data.</p>
+  <p>The App does <strong>not</strong>:</p>
+  <ul>
+    <li>collect shopper names, emails, addresses, or order data;</li>
+    <li>use cookies or tracking on the storefront;</li>
+    <li>share or sell any data to third parties.</li>
+  </ul>
+
+  <h2>Data deletion</h2>
+  <ul>
+    <li>When the App is uninstalled, the store's session record is deleted.</li>
+    <li>The App responds to Shopify's mandatory privacy webhooks
+      (<code>customers/data_request</code>, <code>customers/redact</code>,
+      <code>shop/redact</code>). Because no customer data is stored,
+      <code>customers/*</code> requests have nothing to return or erase;
+      <code>shop/redact</code> deletes any remaining session record for that store.</li>
+  </ul>
+
+  <h2>Hosting &amp; sub-processors</h2>
+  <p>The App's backend is hosted on <strong>Render</strong> and uses a
+  <strong>Neon</strong> (PostgreSQL) database to store the session records described
+  above. These providers process data solely to host the App.</p>
+
+  <h2>Contact</h2>
+  <p>For any privacy question, contact: <strong>bthnnymn@gmail.com</strong></p>
+
+  <h2>Changes</h2>
+  <p>We may update this policy; the "Last updated" date will reflect any change.</p>
+</body>
+</html>
