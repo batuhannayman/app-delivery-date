@@ -34,11 +34,9 @@ The App does **not**:
 
 ## Hosting & sub-processors
 
-The App's backend is hosted on [HOSTING PROVIDER] and uses a
-[DATABASE PROVIDER] database to store the session records described above. These
-providers process data solely to host the App.
-
-> Fill in [HOSTING PROVIDER] and [DATABASE PROVIDER] once hosting is chosen.
+The App's backend is hosted on **Render** and uses a **Neon** (PostgreSQL)
+database to store the session records described above. These providers process
+data solely to host the App.
 
 ## Contact
 
