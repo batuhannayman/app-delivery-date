@@ -1,0 +1,164 @@
+{%- liquid
+  assign days = ''
+  if block.settings.ship_sun
+    assign days = days | append: '0 '
+  endif
+  if block.settings.ship_mon
+    assign days = days | append: '1 '
+  endif
+  if block.settings.ship_tue
+    assign days = days | append: '2 '
+  endif
+  if block.settings.ship_wed
+    assign days = days | append: '3 '
+  endif
+  if block.settings.ship_thu
+    assign days = days | append: '4 '
+  endif
+  if block.settings.ship_fri
+    assign days = days | append: '5 '
+  endif
+  if block.settings.ship_sat
+    assign days = days | append: '6 '
+  endif
+  assign biz_days = days | split: ' '
+-%}
+
+<div
+  class="edd"
+  data-edd
+  id="edd-{{ block.id }}"
+  hidden
+  style="--edd-color: {{ block.settings.text_color }}; text-align: {{ block.settings.alignment }};"
+  {{ block.shopify_attributes }}
+>
+  {%- if block.settings.show_icon -%}
+    <span class="edd__icon" aria-hidden="true">🚚</span>
+  {%- endif -%}
+  <span class="edd__text" data-edd-text></span>
+</div>
+
+<script type="application/json" data-edd-config>
+  {
+    "prepDays": {{ block.settings.prep_days | default: 1 }},
+    "cutoff": {{ block.settings.cutoff_time | json }},
+    "timezone": {{ shop.iana_timezone | json }},
+    "shipMin": {{ block.settings.ship_min | default: 2 }},
+    "shipMax": {{ block.settings.ship_max | default: 5 }},
+    "businessDays": [{{ biz_days | join: ',' }}],
+    "holidays": {{ block.settings.holidays | json }},
+    "messageSingle": {{ block.settings.message_single | json }},
+    "messageRange": {{ block.settings.message_range | json }},
+    "showWeekday": {{ block.settings.show_weekday }},
+    "locale": {{ request.locale.iso_code | json }}
+  }
+</script>
+
+<script src="{{ 'delivery-date.js' | asset_url }}" defer></script>
+
+{% stylesheet %}
+  .edd {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--edd-color, inherit);
+  }
+  .edd[hidden] { display: none; }
+  .edd__icon { font-size: 1.1em; }
+  .edd__text { font-weight: 600; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Delivery Date",
+  "target": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Dispatch rules"
+    },
+    {
+      "type": "number",
+      "id": "prep_days",
+      "label": "Preparation time (business days)",
+      "info": "Business days needed to dispatch after the order is placed. 0 = ships same day.",
+      "default": 1
+    },
+    {
+      "type": "text",
+      "id": "cutoff_time",
+      "label": "Order cutoff time (HH:MM, shop timezone)",
+      "info": "Orders placed after this time count from the next business day. Leave blank for no cutoff.",
+      "default": "14:00"
+    },
+    {
+      "type": "number",
+      "id": "ship_min",
+      "label": "Shipping time — minimum (business days)",
+      "default": 2
+    },
+    {
+      "type": "number",
+      "id": "ship_max",
+      "label": "Shipping time — maximum (business days)",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Dispatch days"
+    },
+    { "type": "checkbox", "id": "ship_mon", "label": "Monday", "default": true },
+    { "type": "checkbox", "id": "ship_tue", "label": "Tuesday", "default": true },
+    { "type": "checkbox", "id": "ship_wed", "label": "Wednesday", "default": true },
+    { "type": "checkbox", "id": "ship_thu", "label": "Thursday", "default": true },
+    { "type": "checkbox", "id": "ship_fri", "label": "Friday", "default": true },
+    { "type": "checkbox", "id": "ship_sat", "label": "Saturday", "default": false },
+    { "type": "checkbox", "id": "ship_sun", "label": "Sunday", "default": false },
+    {
+      "type": "textarea",
+      "id": "holidays",
+      "label": "Holidays (non-dispatch days)",
+      "info": "One date per line in YYYY-MM-DD format. These days are skipped."
+    },
+    {
+      "type": "header",
+      "content": "Display"
+    },
+    {
+      "type": "text",
+      "id": "message_single",
+      "label": "Message — single date",
+      "info": "Use {date} as a placeholder.",
+      "default": "Order today, get it by {date}"
+    },
+    {
+      "type": "text",
+      "id": "message_range",
+      "label": "Message — date range",
+      "info": "Use {from} and {to} as placeholders.",
+      "default": "Estimated delivery: {from} – {to}"
+    },
+    { "type": "checkbox", "id": "show_weekday", "label": "Show weekday name", "default": true },
+    { "type": "checkbox", "id": "show_icon", "label": "Show truck icon", "default": true },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    }
+  ]
+}
+{% endschema %}

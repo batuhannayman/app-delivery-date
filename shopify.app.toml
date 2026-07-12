@@ -3,7 +3,9 @@ client_id = ""
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products"
+# Widget-only app: the delivery date is computed in the theme via Liquid + JS,
+# so no Admin API access is required.
+scopes = ""
 
 [webhooks]
 api_version = "2025-10"
